@@ -33,7 +33,7 @@ public function storeComment(Request $request)
             'comment' => 'required|string|max:1000',
         ]);
 
-        // Create the comment
+       
         Comment::create([
             'news_id' => $request->news_id,
             'comment' => $request->comment,

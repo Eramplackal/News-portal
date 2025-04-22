@@ -86,18 +86,18 @@ class NewsController extends Controller
         $fileExtension = $file->getClientOriginalExtension();
         $newFileName = time() . '_' . uniqid() . '.' . $fileExtension;
 
-        // Compress image using GD library
-        $image = imagecreatefromjpeg($file);  // Use imagecreatefrompng for PNG files
-        $quality = 75; // Set the desired compression quality
-        imagejpeg($image, storage_path('app/public/uploads/' . $newFileName), $quality);  // Save the compressed image
-        imagedestroy($image);  // Free memory
+        
+        $image = imagecreatefromjpeg($file); 
+        $quality = 75; 
+        imagejpeg($image, storage_path('app/public/uploads/' . $newFileName), $quality);  
+        imagedestroy($image);  
 
-        // If the news already has an old image, delete it
+       
         if ($news->image) {
             Storage::disk('public')->delete($news->image);
         }
 
-        $news->image = 'uploads/' . $newFileName;  // Store the path of the compressed image
+        $news->image = 'uploads/' . $newFileName;  
     }
 
     $news->save();
