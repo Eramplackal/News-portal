@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 21, 2025 at 12:25 PM
+-- Generation Time: Apr 22, 2025 at 02:19 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -58,6 +58,14 @@ CREATE TABLE `categories` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
+(6, 'Finance', '2025-04-22 06:44:34', '2025-04-22 06:44:34'),
+(7, 'Technology', '2025-04-22 06:44:40', '2025-04-22 06:44:40');
+
 -- --------------------------------------------------------
 
 --
@@ -67,11 +75,17 @@ CREATE TABLE `categories` (
 CREATE TABLE `comments` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `news_id` bigint(20) UNSIGNED NOT NULL,
-  `author_name` varchar(255) NOT NULL,
-  `content` text NOT NULL,
+  `comment` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `news_id`, `comment`, `created_at`, `updated_at`) VALUES
+(6, 15, 'Thanks for the update', '2025-04-22 06:46:26', '2025-04-22 06:46:26');
 
 -- --------------------------------------------------------
 
@@ -156,10 +170,21 @@ CREATE TABLE `news` (
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `image` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `news`
+--
+
+INSERT INTO `news` (`id`, `category_id`, `title`, `description`, `image`, `created_at`, `updated_at`) VALUES
+(15, 6, 'Stock Market', 'Falls to year low', 'uploads/1745324112_68078850a5b0d.jpg', '2025-04-22 06:45:12', '2025-04-22 06:45:12'),
+(16, 7, 'AIML', 'AIML is booming', 'uploads/1745324130_68078862b3b63.jpg', '2025-04-22 06:45:30', '2025-04-22 06:45:30'),
+(17, 6, 'Mutual Funds', 'Record closures of Mutual Fund SIPs', 'uploads/1745324161_6807888195b05.jpg', '2025-04-22 06:46:01', '2025-04-22 06:46:01'),
+(18, 6, 'GDP growth', 'Indias GDP to grow by 6.5 percent this year', 'uploads/1745324269_680788ed48fa8.jpg', '2025-04-22 06:47:49', '2025-04-22 06:47:49'),
+(19, 6, 'Exports', 'India\'s Export at record high', 'uploads/1745324315_6807891bbc024.jpg', '2025-04-22 06:48:35', '2025-04-22 06:48:35');
 
 -- --------------------------------------------------------
 
@@ -193,7 +218,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('HRh2BqvlgKB6Xtht27TJSnFpuhOy5waTxucP1OcI', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoidUtRcUFySmFFb2FlRmtvM1hqWlBKdlZBTDBTMWdad0lod0NwRmhENSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1745220326);
+('wB3ANl8NGNo6YLAlws4fOEEzVxI6safWzqgu2pr7', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT2xJaGFmdjBIRzJLcGNpNFpDcG8wM2VNTDlobHFDQ3ZxekNqUExQNSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1745324317);
 
 -- --------------------------------------------------------
 
@@ -310,13 +335,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -340,7 +365,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `users`

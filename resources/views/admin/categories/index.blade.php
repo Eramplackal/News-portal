@@ -23,12 +23,9 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>
-                    <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                    <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline"
-                        onsubmit="return confirm('Are you sure to delete?')">
-                        @csrf
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </form>
+                    <a href="{{ route('categories.edit', base64_encode($category->id)) }}" ><i class="fas fa-edit text-warning" title="Edit" class="mx-2"></i></a>
+                    <a href="{{ route('categories.destroy', base64_encode($category->id)) }}"  onclick="return confirm('Are you sure you want to delete this category?')" ><i class="fas fa-trash text-danger" title="Delete" class="mx-2"></i></a>   
+
                 </td>
                 <td>{{ $category->name }}</td>
             </tr>

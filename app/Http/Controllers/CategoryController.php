@@ -36,6 +36,7 @@ class CategoryController extends Controller
     // Show the edit form
     public function edit($id)
     {
+        $id = base64_decode($id);
         $category = Category::findOrFail($id);
         return view('admin.categories.edit', compact('category'));
     }
@@ -58,6 +59,7 @@ class CategoryController extends Controller
     // Delete category
     public function destroy($id)
     {
+        $id = base64_decode($id);
         $category = Category::findOrFail($id);
         $category->delete();
 
